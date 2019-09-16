@@ -26,7 +26,7 @@ function Header() {
     // Set Content
     date.textContent = 'Septemeber 15, 2019'
     title.textContent = 'Lambda Times'
-    temp.textContent = '98';
+    temp.textContent = '98°';
 
     // style Elements
     header.classList.add('header');
@@ -36,6 +36,4 @@ function Header() {
     return header;
 }
 
-const headerContainer = document.querySelector('.header-container');
-
-headerContainer.appendChild(Header());
+document.querySelector('.header-container').appendChild(Header());

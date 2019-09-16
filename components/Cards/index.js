@@ -18,44 +18,75 @@
 //
 // Create a card for each of the articles and add the card to the DOM.
 
-const cardsContainer = document.querySelector('.cards-container');
+function articleCreator(data) {
+  // Create Elements
+  const card = document.createElement("div");
+  const headline = document.createElement("div");
+  const author = document.createElement("div");
+  const imgContainer = document.createElement("div");
+  const img = document.createElement("img");
+  const authorName = document.createElement("span");
 
-axios.get('https://lambda-times-backend.herokuapp.com/articles')
-    .then((results) => {
-        console.log(results);
-        //data
-        
+  // Set structure
+  card.appendChild(headline);
+  card.appendChild(author);
+  author.appendChild(imgContainer);
+  author.appendChild(authorName);
+  imgContainer.appendChild(img);
 
-    })
-        
+  // Set content
+  headline.textContent = data.headline;
+  authorName.textContent = `By ${data.authorName}`;
+  img.src = data.authorPhoto;
 
-    // function createArticles(obj) {
+  // Set Styles
+  card.classList.add("card");
+  headline.classList.add("headline");
+  author.classList.add("author");
+  imgContainer.classList.add("img-container");
 
-    //     // Create Elements
-    //     const card = document.createElement('div');
-    //     const headLine = document.createElement('div');
-    //     const author = document.createElement('div');
-    //     const imgContainer = document.createElement('div');
-    //     const image = document.createElement('img');
-    //     const salute = document.createElement('span');
+  return card;
+}
 
-    //     // Sturcture
-    //     card.appendChild(headLine);
-    //     card.appendChild(author);
-    //     author.appendChild(imgContainer);
-    //     imgContainer.appendChild(image);
-    //     author.appendChild(salute);
+const cardsContainer = document.querySelector(".cards-container");
 
-    //     // Content
-    //     headLine.textContent = obj.headline;
-    //     image.src = obj.authorPhoto;
-    //     salute.textConent = obj.authorName;
+//request
+axios
+  .get("https://lambda-times-backend.herokuapp.com/articles")
+  .then(response => {
+    const bootstrap = response.data.articles.bootstrap,
+      javascript = response.data.articles.javascript,
+      jquery = response.data.articles.jquery,
+      node = response.data.articles.node,
+      technology = response.data.articles.node;
 
-    //     // Set Styles
-    //     card.classList.add('card');
-    //     headLine.classList.add('headline');
-    //     author.classList.add('author')
-    //     imgContainer.classList.add('img-container');
+    bootstrap.forEach(data => {
+      let build = articleCreator(data);
+      cardsContainer.appendChild(build);
+      console.log(build);
+    });
 
-    //     return card;
-    // }
+    javascript.forEach(data => {
+      let build = articleCreator(data);
+      cardsContainer.appendChild(build);
+      console.log(build);
+    });
+
+    jquery.forEach(data => {
+      let build = articleCreator(data);
+      cardsContainer.appendChild(build);
+      console.log(build);
+    });
+
+    node.forEach(data => {
+      let build = articleCreator(data);
+      cardsContainer.appendChild(build);
+      console.log(build);
+    });
+
+    technology.forEach(data => {
+      let build = articleCreator(data);
+      cardsContainer.appendChild(build);
+      console.log(build);
+    });
+  });
