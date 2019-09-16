@@ -20,7 +20,7 @@ function Header() {
 
     // Set Sturcture
     header.appendChild(date);
-    header.appendChild(h1);
+    header.appendChild(title);
     header. appendChild(temp);
     
     // Set Content
@@ -36,5 +36,6 @@ function Header() {
     return header;
 }
 
-const headerContainer = document.querySelector('.header-selector');
+const headerContainer = document.querySelector('.header-container');
+
 headerContainer.appendChild(Header());
