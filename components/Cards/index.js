@@ -17,3 +17,76 @@
 // </div>
 //
 // Create a card for each of the articles and add the card to the DOM.
+
+function articleCreator(data) {
+  // Create Elements
+  const card = document.createElement("div");
+  const headline = document.createElement("div");
+  const author = document.createElement("div");
+  const imgContainer = document.createElement("div");
+  const img = document.createElement("img");
+  const authorName = document.createElement("span");
+
+  // Set structure
+  card.appendChild(headline);
+  card.appendChild(author);
+  author.appendChild(imgContainer);
+  author.appendChild(authorName);
+  imgContainer.appendChild(img);
+
+  // Set content
+  headline.textContent = data.headline;
+  authorName.textContent = `By ${data.authorName}`;
+  img.src = data.authorPhoto;
+
+  // Set Styles
+  card.classList.add("card");
+  headline.classList.add("headline");
+  author.classList.add("author");
+  imgContainer.classList.add("img-container");
+
+  return card;
+}
+
+const cardsContainer = document.querySelector(".cards-container");
+
+//request
+axios
+  .get("https://lambda-times-backend.herokuapp.com/articles")
+  .then(response => {
+    const bootstrap = response.data.articles.bootstrap,
+      javascript = response.data.articles.javascript,
+      jquery = response.data.articles.jquery,
+      node = response.data.articles.node,
+      technology = response.data.articles.node;
+
+    bootstrap.forEach(data => {
+      let build = articleCreator(data);
+      cardsContainer.appendChild(build);
+      console.log(build);
+    });
+
+    javascript.forEach(data => {
+      let build = articleCreator(data);
+      cardsContainer.appendChild(build);
+      console.log(build);
+    });
+
+    jquery.forEach(data => {
+      let build = articleCreator(data);
+      cardsContainer.appendChild(build);
+      console.log(build);
+    });
+
+    node.forEach(data => {
+      let build = articleCreator(data);
+      cardsContainer.appendChild(build);
+      console.log(build);
+    });
+
+    technology.forEach(data => {
+      let build = articleCreator(data);
+      cardsContainer.appendChild(build);
+      console.log(build);
+    });
+  });
